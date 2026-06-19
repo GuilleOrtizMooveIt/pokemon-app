@@ -1,4 +1,5 @@
 import { Pokemon } from '../PokemonType';
+import StatList from './StatList';
 
 interface PokemonCardProps {
   pokemon: Pokemon | null;
@@ -14,7 +15,7 @@ function PokemonCard({ pokemon, description }: PokemonCardProps) {
       {pokemon && <p>Height: {pokemon.height}</p>}
       {pokemon && <p>Weight: {pokemon.weight}</p>}
 
-      <p>Tipo:</p>
+      <p  style={{ textAlign: 'left' }}>Tipo:</p>
       <ul style={{ paddingLeft: '20px', margin: '8px 0', textAlign: 'left', display: 'inline-block' }}>
           {pokemon.types.map((t) => (
               <li key={t.type.name}>{t.type.name}</li>
@@ -22,6 +23,8 @@ function PokemonCard({ pokemon, description }: PokemonCardProps) {
       </ul>
 
       {description && <p>{description}</p>}
+
+      <StatList stats={pokemon.stats} />
 
 
     </div>
