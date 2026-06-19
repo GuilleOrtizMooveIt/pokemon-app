@@ -9,7 +9,9 @@ function usePokemon(name: string) {
   const [error, setError] = useState<string | null>(null);
 
   const fetchPokemon = useCallback( async () => {
-  	setLoading(true);
+  	setLoading(true);// todo add reducer
+  	setPokemon(null);
+    setDescription(null);
     setError(null);
     try {
 
@@ -34,12 +36,14 @@ function usePokemon(name: string) {
 
     } catch (err) {
 
-    	setError('Error en la busqueda: ' + err);
+        setError('Error en la busqueda: ' + err);
+    	setPokemon(null);
+    	setDescription(null);
 
     } finally {
 
     	setLoading(false);
-    	
+
     }
   }, [name]);
 
