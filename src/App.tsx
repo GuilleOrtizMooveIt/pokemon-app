@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import usePokemon from './hooks/usePokemon';
+import SearchBar from './components/SearchBar';
+import PokemonCard from './components/PokemonCard';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    const [name, setName] = useState('');
+    const { pokemon, description, loading, error, fetchPokemon } = usePokemon(name);
+
+    return (
+      <div style={{ textAlign: 'center', marginTop: '40vh' }} >
+    
+        <p>Busca un Pokemon</p>
+        <br />
+        <SearchBar name={name} onNameChange={setName} onSearch={fetchPokemon} />
+        <PokemonCard pokemon={pokemon} description={description} />
+
+        <br />
+        {loading && <p> Cargando...</p>}
+        {error && <p> {error}</p>}
+    
+      </div>
   );
 }
 
